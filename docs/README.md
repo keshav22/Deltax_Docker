@@ -13,7 +13,9 @@
 ### Installation & Run
 1. Open cmd/terminal & navigate inside Task folder
 1. If your system has nodejs installed you can run the below line of code & you will be good to go.
+
 		npm install / yarn
+		
 		npm start / yarn start / node index.js
 2. Since I have incorporated docker so nothing to worry just run the belowcode 
 	
