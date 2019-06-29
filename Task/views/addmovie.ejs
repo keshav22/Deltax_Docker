@@ -1,0 +1,96 @@
+<!Doctype Html>
+<html>
+    <head>
+        <title>AddMovie</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript">
+    function check()
+        {
+            var t  =document.getElementById('title').value;
+            var y = document.getElementById('year').value;
+            var d = document.getElementById('time').value;
+            var c = document.getElementById('country').value;
+            var u = document.getElementById('url').value;
+            var d = document.getElementById('description').value;
+            var p = document.getElementById('producer').value;
+            var a = document.getElementById('Actor').value;
+            if(t == '' ||y == '' ||d == '' ||c == '' ||u == '' ||d == '' ||p == '' || a == '')
+            {
+                alert("Alert valid data");
+                return false;
+            }
+            else
+            {
+                a = parseInt(a);
+                if(!isNaN(a))
+                {
+                for(var  i = 0 ;i<a;i++)
+                {
+                    var c = document.getElementById('actor'+i).value;
+                    if(c=='')
+                    {
+                        alert("Alert valid data");
+                        return false;
+                    }   
+                }
+                }
+                else
+                alert("Alert valid data");
+                
+            }
+            return true;
+     }
+        function addinput() {
+            document.getElementById('Actors').innerHTML = "";	
+            var div = document.createElement('div');
+            var val = document.getElementById('Actor').value;
+            for(var i = 0; i < val; i++) {
+                var inputElement=document.createElement('input');
+                inputElement.setAttribute('type','text');
+                inputElement.setAttribute('class','signuprod')
+                inputElement.setAttribute('name','actor'+ i);
+                inputElement.setAttribute('id','actor'+ i);
+                inputElement.setAttribute('placeholder','Name');
+                div.appendChild(inputElement);
+            }
+            document.getElementById('Actors').appendChild(div);
+        }
+    </script>
+  <link rel="stylesheet" type="text/css" href= "/signup.css">
+  </head>
+
+<body style="background: #000000;">
+    <div id="parent" style="width:100%; height:100%;" align="center">
+        <h2 style="text-align: center;color: #fff"><%=data%></h2>
+    <div id="child"  style="display:inline-block; padding: 10px;border: 1px solid #A9A9A9; border-radius: 25px;">
+        <br>
+        <form action="/addmovie" onsubmit="return check()" method="POST">
+            
+            <input type="text" name="title" id="title" class="signuprod" placeholder="Title" ><br><br>
+            <input type="number" name="year" id="year" class="signuprod" placeholder="Year Released" ><br><br>
+            <input type="number" name="time" id="time" class="signuprod" placeholder="Duration" ><br><br>
+            <input type="text" name="country" id="country" class="signuprod" placeholder="Country" ><br><br>
+            <input type="text" name="url" id="url" class="signuprod" placeholder="Img url" ><br><br>
+            <input type="text" name="description" id="description" class="signuprod" placeholder="Description" ><br><br>
+            <input type="text" name="producer" id="producer" class="signuprod" placeholder="Producer" ><br><br>
+            <input type="text" name="Actor" name="actor" id="Actor" class="signuprod" placeholder="No. of Actors" onkeyup="addinput()" ><br><br>
+            <div id="Actors">
+            </div>
+            <input type="SUBMIT" style="border-radius: 25px; margin-top: 10px; background:#000000" class= "signupprod" >
+            
+        </form>
+        <h4 style="color:#fff">*You can edit/add actor data on actor</h4>
+        <h4 style="color:#fff">page so here we are taking just the name.</h4>
+        <br>
+    </div>
+    </div>
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+</html>

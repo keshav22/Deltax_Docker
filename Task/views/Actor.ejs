@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>
+            <%=title%>
+        </title>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        function switch_feild()
+        {
+            
+            //alert(document.getElementById('img').readOnly);
+            
+            
+            if( document.getElementById('btn').value == 'Edit' )
+            document.getElementById('btn').value = "Save";
+            else
+            {   
+                if(document.getElementById('img').value==''||document.getElementById('name').value == '' ||document.getElementById('gender').value == '')
+                {
+                    alert("Enter valid value");
+                    return false;
+                }
+                document.getElementById('submi').click();
+                document.getElementById('btn').value = "Edit";
+                return true;
+            }
+
+            if(document.getElementById('img').style.visibility=='hidden')
+            {
+                document.getElementById('img').style.visibility='visible';
+                document.getElementById('img').focus();
+            }
+            else
+            document.getElementById('img').style.visibility='hidden';
+            
+
+            document.getElementById('img').readOnly = !document.getElementById('img').readOnly;
+            document.getElementById('name').readOnly = !document.getElementById('name').readOnly;
+            document.getElementById('gender').readOnly = !document.getElementById('gender').readOnly;
+            
+            return false;
+        }
+    </script>
+    </head>
+    <body style="background: #000000">
+        <div style="display:inline-block; width:100%;">
+        <img style="padding: 20px; border: 2px #ffffff;" height="340" src=<%=data[0].act_img%>>
+        </div>
+        <form  action="/ActorE"  method="POST">
+            <input type="text" style="visibility: hidden; width:0;height:0;" value="<%=act_id%>" name="id">
+        
+        <div>
+            <input type="text"  id="img" name="img" style="padding-left:20px;color: #ffffff; visibility: hidden; background: #000000;border:0px;" value = "<%=data[0].act_img%>" readonly>
+        </div>
+        <div>
+        <input type="text" id="name" name="name" style="padding-left:20px;color: #ffffff;background: #000000;border:0px;" value = "<%=data[0].act_fname%>" readonly>
+        </div>
+        <div>
+            <label style="padding-left:20px;color: #ffffff;" >Gender: 
+        <input type="text" id="gender" name="gender" style="padding-left:20px;color: #ffffff; background: #000000;border:0px;" value = "<%=data[0].act_gender%>" readonly>
+    </label>    
+    </div>
+        <input type="submit" id="submi" style="visibility: hidden">
+        </form>
+        <div style="width:100%;align-items: center;">
+        <h4 style="color:#ffffff;padding-left:20px;">Movies Acted On</h4>
+        </div>
+        <% data.forEach(function(show,index){%>
+            <form action="/movie" id="<%=index%>" method="POST" style="padding-left:20px;display:inline-block">
+                <input type="text" style="visibility: hidden; width:0;height:0;" value="<%=show["mov_id"]%>" name="tvid">
+                <input type="image" style="padding-left:20px;height:180px; width:130px;" src="<%=show["img_url"]%>" onClick="this.form.submit()"  >
+            </form>
+            <% }) %>
+        
+        <div style="text-align: center;">
+        <div style="display: inline-block">
+        <div style="display: block">
+        <input style="color: #ffffff;background: #000" id="btn" onclick="switch_feild()" type="submit" value='Edit'></input>
+        
+        </div>
+        </div>
+        </div>
+    
+    </body>
+</html>
